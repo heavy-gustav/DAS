@@ -23,10 +23,42 @@ X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
 # Fitting the model to the Training set
-# TODO
+from sklearn.ensemble import RandomForestClassifier
+
+# creating a RF classifier
+clf = RandomForestClassifier() 
+
+# Training the model on the training dataset
+# fit function is used to train the model using the training sets as parameters
+clf.fit(X_train, y_train)
+
+# performing predictions on the test dataset
+y_pred = clf.predict(X_test)
+
 
 # Using the model to predict the Test set
-# TODO
+y_pred = clf.predict(X_test)
+
 
 # Computing and printing evaluation metrics (confusion matrix, accuracy, precision, recall, f1) 
-# TODO
+
+# metrics are used to find accuracy or error
+from sklearn import metrics 
+print()
+
+# using metrics module for accuracy calculation
+print("ACCURACY OF THE MODEL:", metrics.accuracy_score(y_test, y_pred))
+
+# confusion matrix
+import matplotlib.pyplot as plt
+from sklearn.metrics import ConfusionMatrixDisplay
+
+ConfusionMatrixDisplay.from_estimator(clf, X_test, y_test)
+plt.title('Confusion Matrix')
+plt.ylabel('True Values')
+plt.xlabel('Predicted Values')
+plt.show()
+
+#F1-score
+from sklearn.metrics import f1_score
+print("ACCURACY OF THE MODEL:", f1_score(y_test, y_pred, average='macro'))
