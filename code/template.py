@@ -67,3 +67,69 @@ plt.title('Confusion Matrix')
 plt.ylabel('True Values')
 plt.xlabel('Predicted Values')
 plt.show()
+
+import numpy as np
+from sklearn import metrics
+scores = clf.predict_proba(X_test)[:1]
+fpr, tpr, thresholds = metrics.roc_curve(y_test, scores)
+metrics.auc(fpr, tpr)
+
+
+
+# Log Reg
+from sklearn.linear_model import LogisticRegression
+log = LogisticRegression()
+
+# Training the model on the training dataset
+# fit function is used to train the model using the training sets as parameters
+log.fit(X_train, y_train)
+
+# performing predictions on the test dataset
+y_pred = log.predict(X_test)
+
+
+# Using the model to predict the Test set
+y_pred = log.predict(X_test)
+
+print()
+
+# using metrics module for accuracy calculation
+print("ACCURACY OF THE MODEL:", metrics.accuracy_score(y_test, y_pred))
+
+# precision
+print("PRECISION OF MODEL", metrics.precision_score(y_test, y_pred))
+
+# recall
+print("RECALL OF MODEL", metrics.recall_score(y_test, y_pred))
+
+# f1-score
+print("F1-SCORE OF MODEL", metrics.f1_score(y_test, y_pred))
+
+# Gradient Boost
+from sklearn.ensemble import GradientBoostingClassifier
+gb= GradientBoostingClassifier()
+
+# Training the model on the training dataset
+# fit function is used to train the model using the training sets as parameters
+gb.fit(X_train, y_train)
+
+# performing predictions on the test dataset
+y_pred = gb.predict(X_test)
+
+
+# Using the model to predict the Test set
+y_pred = gb.predict(X_test)
+
+print()
+
+# using metrics module for accuracy calculation
+print("ACCURACY OF THE MODEL:", metrics.accuracy_score(y_test, y_pred))
+
+# precision
+print("PRECISION OF MODEL", metrics.precision_score(y_test, y_pred))
+
+# recall
+print("RECALL OF MODEL", metrics.recall_score(y_test, y_pred))
+
+# f1-score
+print("F1-SCORE OF MODEL", metrics.f1_score(y_test, y_pred))
