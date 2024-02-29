@@ -61,4 +61,4 @@ plt.show()
 
 #F1-score
 from sklearn.metrics import f1_score
-print("ACCURACY OF THE MODEL:", f1_score(y_test, y_pred, average='macro'))
+print("F1-Score:", f1_score(y_test, y_pred, average='macro'))
