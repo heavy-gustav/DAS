@@ -49,6 +49,15 @@ print()
 # using metrics module for accuracy calculation
 print("ACCURACY OF THE MODEL:", metrics.accuracy_score(y_test, y_pred))
 
+# precision
+print("PRECISION OF MODEL", metrics.precision_score(y_test, y_pred))
+
+# recall
+print("RECALL OF MODEL", metrics.recall_score(y_test, y_pred))
+
+# f1-score
+print("F1-SCORE OF MODEL", metrics.f1_score(y_test, y_pred))
+
 # confusion matrix
 import matplotlib.pyplot as plt
 from sklearn.metrics import ConfusionMatrixDisplay
@@ -58,7 +67,3 @@ plt.title('Confusion Matrix')
 plt.ylabel('True Values')
 plt.xlabel('Predicted Values')
 plt.show()
-
-#F1-score
-from sklearn.metrics import f1_score
-print("F1-Score:", f1_score(y_test, y_pred, average='macro'))
