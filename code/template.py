@@ -34,9 +34,7 @@ clf = RandomForestClassifier()
 clf.fit(X_train, y_train)
 
 # performing probalility_predictions on the test dataset
-y_pred = clf.predict_proba(X_test)
-
-
+y_pred = clf.predict(X_test)
 
 # Computing and printing evaluation metrics (confusion matrix, accuracy, precision, recall, f1) 
 
