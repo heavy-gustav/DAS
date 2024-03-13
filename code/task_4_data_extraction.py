@@ -20,6 +20,7 @@ def count_feature_set(lines):
     :return: an array containing count values for each feature set in the fils "lines" received
     """
 
+    # Define the features and their corresponding numerical identifiers
     NEW_FEATURE_SET = {
         "length": 1, # lines of code (int)
         "install": 2, # installs something (bool)
@@ -30,14 +31,17 @@ def count_feature_set(lines):
         "getdeviceid": 7, # gets device id (bool)
     }
 
+    # Initialize a dictionary to hold the count of each feature set
     features_map = {x: 0 for x in range(1, 8)}
     
     length = 0
 
+    # Iterate over each line in the input file
     for l in lines:
         if l != "\n":
             call_instance:str = l.split("::")[1] ## calltype ex. getdeviceid
 
+            # Iterate over each feature set and update the count if the feature is found in the line
             for key, value in NEW_FEATURE_SET.items():
                 if key == "length":
                     continue
@@ -45,8 +49,10 @@ def count_feature_set(lines):
 
             length += 1
     
+    # Update the count of "length" feature
     features_map[1] = length
 
+    # Convert the counts to a list
     features = []
     for i in range(1, 8):
         features.append(features_map[i])
@@ -61,6 +67,7 @@ def read_sha_files():
     """
     feature_count = []
     count = 0
+     # Open each file and compute feature set count using count_feature_set function
     for filename in os.listdir(dir_of_files):
         sha_data = open(dir_of_files+ filename)
         feature_count.append([filename] + count_feature_set(sha_data))
@@ -81,6 +88,7 @@ def create_csv_for_sha_data():
     with open(feature_of_counts_temp, "wt", newline ='') as file:
         writer = csv.writer(file, delimiter=',')
         writer.writerow(i for i in header)
+        # Iterate over each file, compute feature set count, and write it to the CSV 
         for j in read_sha_files():
             writer.writerow(j)
 
@@ -94,11 +102,14 @@ create_csv_for_sha_data()
     using the ground truth given in the sha_family file,
 """
 data = pd.read_csv(known_malware_files)
+# Extract the sha256 column from the data
 sha_column = data["sha256"]
 
 feature_vectors_data = pd.read_csv(feature_of_counts_temp)
+# Extract the sha256 column from the feature vectors data
 sha256_data = feature_vectors_data['sha256']
 
+# Create a boolean mask indicating whether each sha256 value from feature_vectors_data is present in sha_column
 mask = np.in1d(sha256_data, sha_column)
 
 

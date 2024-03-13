@@ -19,6 +19,7 @@ def count_feature_set(lines):
     :param lines: features in the text file
     :return: an array containing count values for each feature set in the fils "lines" received
     """
+    # Define the features and their corresponding numerical identifiers
     FEATURES_SET = {
         "feature": 1,
         "permission": 2,
@@ -33,11 +34,13 @@ def count_feature_set(lines):
         "url": 8
     }
 
+    # Initialize a dictionary to hold the count of each feature set
     features_map = {x: 0 for x in range(1, 9)}
+    # Iterate over each line in the input file
     for l in lines:
         if l != "\n":
-            set = l.split("::")[0]
-            features_map[FEATURES_SET[set]] += 1
+            set = l.split("::")[0] # Extract the feature set name
+            features_map[FEATURES_SET[set]] += 1 # Increment the count for the corresponding feature set
     features = []
     for i in range(1, 9):
         features.append(features_map[i])
@@ -81,11 +84,14 @@ create_csv_for_sha_data()
     using the ground truth given in the sha_family file,
 """
 data = pd.read_csv(known_malware_files)
+# Extract the sha256 column from the data
 sha_column = data["sha256"]
 
 feature_vectors_data = pd.read_csv(feature_of_counts_temp)
+# Extract the sha256 column from the feature vectors data
 sha256_data = feature_vectors_data['sha256']
 
+# Create a boolean mask indicating whether each sha256 value from feature_vectors_data is present in sha_column
 mask = np.in1d(sha256_data, sha_column)
 
 
