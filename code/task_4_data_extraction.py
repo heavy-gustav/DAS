@@ -77,7 +77,7 @@ def create_csv_for_sha_data():
     :param lines: none
     :return: none
     """
-    header = ['sha256', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8']
+    header = ['sha256', 's1', 's2', 's3', 's4', 's5', 's6', 's7']
     with open(feature_of_counts_temp, "wt", newline ='') as file:
         writer = csv.writer(file, delimiter=',')
         writer.writerow(i for i in header)
